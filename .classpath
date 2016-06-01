@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="scala-lib/scala-xml_2.11-1.0.5-sources.jar"/>
+	<classpathentry kind="lib" path="scala-lib/scala-xml_2.11-1.0.5.jar" sourcepath="scala-lib/scala-xml_2.11-1.0.5-sources.jar"/>
+	<classpathentry kind="lib" path="scala-lib"/>
+	<classpathentry kind="lib" path="scala-lib/scala-actors-2.11.8.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-common-2.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-hdfs-2.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-mapreduce-client-core-2.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-mapreduce-client-common-2.7.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
