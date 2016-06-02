@@ -60,6 +60,17 @@ object charpter07 extends App {
     Predef println random.nextDouble()
     Predef println random.nextDouble()
   }
+  
+  /*
+   * 7.4
+   * 在你看来Scala的设计者为什么要提供package object语法而不是简单的让你将函数和变量添加到包中呢？
+   */
+  
+  /*
+   * 7.5
+   * private[com] def giveRaise(rate:Double)的含义是什么？有用吗？
+   * 除了com包可访问，其他包都不能访问。
+   */
 
   /*
    * 7.6
@@ -84,6 +95,20 @@ object charpter07 extends App {
 
     println(smap.mkString)
   }
+  
+  /*
+   * 7.7
+   * 在前一个练习中，将所有引入语句移动到尽可能小的作用域里
+   */
+  
+  /*
+   * 7.8
+   * 以下代码的作用是什么？这是个好主意吗？ 
+   *   import java._ 
+   *   import javax._
+   *  
+   *  引入java和javax下所有的子包, 不是个好主意, 引入的作用域太大, 容易引发命名冲突
+   */
 
   /*
    * 7.9
@@ -97,6 +122,11 @@ object charpter07 extends App {
     if (pwd == "secret") println("hello, " + System.getProperty("user.name"))
     else System.err.println("password is wrong")
   }
+  
+  /*
+   * 7.10
+   * 除了StringBuilder,还有哪些java.lang的成员是被scala包覆盖的？
+   */
 
   question9()
 }

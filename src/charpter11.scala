@@ -2,6 +2,10 @@
 import scala.collection.mutable.ArrayBuffer
 
 object charpter11 extends App {
+  /*
+   * 11.1
+   * 根据优先级规则，3+4 -> 5 和3 -> 4+5是如何被求值的?
+   */
   def question1() {
     val res1 = 3 + 4 -> 5
     //3 -> 4 + 5 错的
@@ -9,9 +13,20 @@ object charpter11 extends App {
     println(res1)
     println(res2)
   }
+  
+  /*
+   * 11.2
+   * BigInt类有一个pow方法,但没有用操作符字符.Scala类库的设计者为什么没有选用**或者^作为乘方操作符呢?
+   */
 
   /*
-   * question3
+   * 11.3
+   * 实现Fraction类, 支持 + - * / 操作,
+   * 支持约分, 列入将15/-6变成-5/-2,
+   * 除以最大公约数,像这样:
+   * class Fraction(n:Int, d:Int) {
+   * 	private
+   * }
    */
   class Fraction {
     var n: Int = _
@@ -50,8 +65,10 @@ object charpter11 extends App {
   Predef println Fraction(1, 2) - Fraction(1, 4)
 
   /*
-   * question 4  
-   * 不该提供 *和/
+   * 11.4  
+   * 实现一个Money类,加入美元和美分字段。提供+,-操作符以及比较操作符==和<。
+   * 举例来说，Money(1,75)+Money(0,50)==Money(2,25)应为true。
+   * 你应该同时提供*和/操作符吗？为什么？
    */
   class Money(var cent: Int) {
 
@@ -71,7 +88,12 @@ object charpter11 extends App {
   Predef println Money(1, 50) == Money(0, 150)
 
   /*
-   * question 5
+   * 11.5
+   * 提 供操作符用于构造HTML表格。
+   * 例如:
+   *   Table() | "Java" | "Scala" || "Gosling" | "Odersky" || "JVM" | "JVM,.NET"
+   * 应产出:
+   *   <table><tr><td>Java</td></tr><td>Scala</td></tr><tr><td>Gosling…
    */
   class Table {
     val eles = ArrayBuffer[ArrayBuffer[String]](ArrayBuffer[String]())
@@ -106,7 +128,20 @@ object charpter11 extends App {
   Predef println Table() | "a" | "b" || "c" | "d"
 
   /*
-   * question6
+   * 11.6
+   * 提供一个ASCIIArt类，其对象包含类似这样的图形:
+   *  /\_/\
+	 * ( ' ' )
+   * (  -  )
+ 	 *  | | |
+   * (__|__)
+   * 提供将两个ASCIIArt图形横向或纵向结合的操作符。选用适当优先级的操作符命名。
+   * 纵向结合的示例
+   *   /\_/\     -----
+   *  ( ' ' )  / Hello \
+   *  (  -  ) <  Scala |
+   *   | | |   \ Coder /
+   *  (__|__)    -----
    */
   class ASCIIArt(val eles: Array[String]) {
 
@@ -130,7 +165,9 @@ object charpter11 extends App {
   Predef println ASCIIArt(Array("|    |", " |  | ", "  ||  ")) + ASCIIArt(Array("  ||  ", " |  | ", "|    |"))
 
   /*
-   * question 7
+   * 11.7
+   * 实现一个BigSequence类,将64个bit的序列打包在一个Long值中。
+   * 提供apply和update操作来获取和设置某个具体的bit
    */
   class BigSequence {
     var bits = new Array[Boolean](64)
@@ -147,7 +184,10 @@ object charpter11 extends App {
   Predef println bs(45)
 
   /*
-   * question 8
+   * 11.8
+   * 提供一个Matrix类—你可以选择需要的是一个2*2的矩阵，任意大小的正方形矩阵，
+   * 或m*n的矩阵。支持+和*操作。*操作应同样适用于单值，例如mat*2。
+   * 单个元素可以通过mat(row,col)得到
    */
   class Matrix(var row: Int, var col: Int) {
     def +(that: Matrix): Matrix = Matrix(this.row + that.row, this.col + that.col)
@@ -173,7 +213,15 @@ object charpter11 extends App {
   Predef println Matrix(3, 4) + 2
 
   /*
-   * question 9 & 10
+   * 11.9 & 11.10
+   * 9)
+   *   为RichFile类定义unapply操作，提取文件路径，名称和扩展名。
+   *   举例来说，文件/home/cay/readme.txt的路径为/home/cay,
+   *   名称为readme,扩展名为txt
+   * 10)
+   *   为RichFile类定义一个unapplySeq，提取所有路径段。
+   *   举例来说，对于/home/cay/readme.txt，
+   *   你应该产出三个路径段的序列:home,cay和readme.txt
    */
   class RichFile(val file: java.io.File) {
   }

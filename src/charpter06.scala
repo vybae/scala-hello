@@ -93,11 +93,13 @@ object charpter06 extends App {
   }
 
   /*
+   * 6.7
    * 实现一个函数, 检查某张牌的花色是否为红色
    */
   def question7(): Unit = question6()
 
   /*
+   * 6.8
    * 编写一个枚举,描述RGB立方体的八个角, ID使用颜色值 (例如, 红色是0xff0000)
    */
   def question8(): Unit = {
