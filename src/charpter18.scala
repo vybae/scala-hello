@@ -3,7 +3,16 @@ import scala.collection.mutable.ArrayBuffer
 
 object charpter18 extends App {
   /*
-   * question 1 & 2
+   * 18.1 & 18.2
+   * 1)
+   *   实现一个Bug类，对沿着水平线爬行的虫子建模。move方法向当前方向移动，turn方法让虫子转身，show方法打印出当前的位置。
+   *   让这些方法可以被串接调用。例如： 
+   *   bugsy.move(4).show().move(6).show().turn().move(5).show()
+   *   上述代码应显示 4 10 5。
+   * 2)
+   *   为前一个练习中的Bug类提供一个流利接口，达到能编写如下代码的效果：
+   *   bugsy move 4 and show and then move 6 and show turn around move 5 and show
+   *   
    */
   class Bug {
     var position = 0
@@ -41,7 +50,9 @@ object charpter18 extends App {
   bugsy move 3 and show and turn and then move 3 and show and then move 5 and show
 
   /*
-   * question3
+   * 18.3
+   * 完成18.1节中的流利接口，以便我们可以做出如下调用：
+   * book set Title to "Scala for the Impatient" set Author to "Cay Horstmann"
    */
   class Book(var title: String, var author: String) {
     var nextAction: BookAction = _
@@ -73,7 +84,8 @@ object charpter18 extends App {
   new Book("c", "d") set Title to "a" set Author to "b"
 
   /*
-   * question4
+   * 18.4
+   * 实现18.2节中被嵌套在Network类中的Member类的equals方法。两个成员要想相等，必须属于同一个网络。
    */
   class Network {
     class Member(val name: String) {
@@ -91,7 +103,13 @@ object charpter18 extends App {
   }
 
   /*
-   * question5
+   * 18.5
+   * 考虑如下类型别名
+   *   type NetworkMember = n.Member forSome { val n: Network }
+   * 和函数
+   *   def process(m1: NetworkMember, m2: NetworkMember) = (m1, m2)
+   * 这与18.8节中的process函数有什么不同？
+   * 
    * process 和 process2的区别是
    * process接受相同或不同网络的成员
    * 而18.8节中的函数(process2)则拒绝那些来自不同网络的成员。
@@ -112,7 +130,10 @@ object charpter18 extends App {
   //  fred.contacts += barney //ERROR
 
   /*
-   * question6 
+   * 18.6
+   * Scala 类库中的Either类型可以被用于要么返回结果，要么返回某种失败信息的算法。
+   * 编写一个带有两个参数的函数：一个已排序整型数组和一个整数值。要么返回该整数值在数组中的下标，要么返回最接近该值的元素的下标。
+   * 使用一个中置类型作为返回类型。
    */
   def testScalaEither(seq: Seq[Int], value: Int): Array[Int] Either Int = {
     val idx = seq.indexOf(value)
@@ -135,11 +156,13 @@ object charpter18 extends App {
   if (tse.isRight) println(tse) else tse.left.get foreach println
 
   /*
-   * question7
+   * 18.7
+   * 实现一个方法，接受任何具备如下方法的类的对象和一个处理该对象的函数。
+   * 调用该函数，并在完成或有任何异常发生时调用close方法。
    */
   def dealWithClose(obj: { def close(): Unit }) {
     try {
-
+      ???
     }
     catch {
       case t: Throwable => obj.close()
@@ -147,7 +170,11 @@ object charpter18 extends App {
   }
 
   /*
-   * question8
+   * 18.8
+   * 编写一个函数printValues, 带有三个参数f、from和to, 打印出所有给定区间范围内的值经过f计算后的结果, 
+   * 这里的f应该是任何带有接受Int产出Int的apply方法的对象. 例如:
+   *   printValues { (x: Int) => x * x,3,6 } // 将打印 9 16 25 36
+   *   printValues { Array(1,1,2,3,5,8,13,21,34,55),3,6 } //将打印 3 5 8 13
    */
   def printValues(f: { def apply(x: Int): Int }, from: Int, to: Int) {
     from to to foreach { x => println(f.apply(x)) }
@@ -156,25 +183,44 @@ object charpter18 extends App {
   //  printValues(Array(1,2,3,4,5,6,7),1,3)
 
   /*
-   * question9
+   * 18.9
+   * 考虑如下对物理度量建模的类:
+   *   abstract class Dim[T](val value: Double, val name: String) {
+   *     protected def create(v: Double): T
+   *     def +(other: Dim[T]) = create(value + other.value)
+   *     override def toString() = value + " " + name
+   *   }
+   * 以下是具体子类:
+   *   class Seconds(v: Double) extends Dim[Seconds] (v, "s") {
+   *     override def create(v: Double) = new Seconds(v)
+   *   }
+   * 但不清楚状况的人可能会定义
+   *   class Meters(v: Double) extends Dim[Meters](v, "m") {
+   *     override def create(v: Double) = new Seconds(v)
+   *   }
+   * 允许米(Meter)和秒(Second)相加
+   * 使用自身类型来防止发生这样的情况
    */
   abstract class Dim[T](val value: Double, val name: String) {
-    protected def create(v: Double): Dim[T]
+    this: T =>
+    protected def create(v: Double): T
     def +(other: Dim[T]) = create(value + other.value)
     override def toString() = value + " " + name
   }
   class Seconds(v: Double) extends Dim[Seconds](v, "s") {
     override def create(v: Double) = new Seconds(v)
   }
+  //如果定义成 class Meters(v: Double) extends Dim[Seconds](v, "m") 将会报错
   class Meters(v: Double) extends Dim[Meters](v, "m") {
     override def create(v: Double) = new Meters(v)
   }
   val sec1 = new Seconds(1)
-  val sec2 = new Seconds(2)
-  sec1 + sec2
+  val sec2 = new Meters(2)
+  // sec1 + sec2 // 报错, 无法相加
 
   /*
-   * question10
+   * 18.10
+   * 自身类型通常可以被扩展自类的特质替代,但某些情况下使用自身类型会改变初始化和重写的顺序, 构造出这样的一个示例 
    */
   class Base { val x = 0 }
   class Ext extends Base {}
