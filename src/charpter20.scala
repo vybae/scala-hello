@@ -21,8 +21,14 @@ import java.util.Date
 object charpter20 {
   val cpuNum: Int = 4
   /*
-   * question 1 & 10
-   * caculate the avg of integer array
+   * 20.1 & 20.10
+   * 1)
+   *   编写一个程序, 生成由n个随机数组成的数组, (其中n是一个很大的值, 比如1000000), 然后通过将工作分发给多个actor的方式计算这些数的平均值, 
+   *   每个actor计算子区间之内的值的和, 将结果发给一个能生成结果的actor.
+   *   如果你在双线程或者四线程的计算机上运行此程序, 这和单线程的解决方案相比有多大差别? 快多少?
+   *   caculate the avg of integer array
+   * 2)
+   *   重写20.1的程序, 使用消息通道来通信	
    */
   def question1(n: Int) {
     // init
@@ -91,8 +97,11 @@ object charpter20 {
   }
 
   /*
-   * question2
-   * 这里为了方便起见， 分片图像的宽度为1024的整除数
+   * 20.2
+   * 编写一段程序, 读取一个大型图片到BufferedImage对象中, 用javax.imageio.ImageIO.read方法.
+   * 使用多个actor, 每个actor对图片的某一个特定条带区域进行反色处理.
+   * 当所有条带反色后, 输出结果.
+   * 下面的代码为了方便起见， 设定分片图像的宽度为1024的整除数
    */
   def question2(path: String) {
     // 初始设置变量
@@ -127,7 +136,17 @@ object charpter20 {
   }
 
   /*
-   * question 3 & 4 & 5 & 7
+   * 20.3 & 20.4 & 20.5 & 20.7
+   * 3)
+   *   编写一个程序, 对给定目录下所有子目录的所有文件中匹配某个给定的正则表达式的单次进行计数.
+   *   对每一个文件各采用一个actor, 另外再加上一个actor用来遍历所有子目录, 还有一个actor将结果汇总到一起.
+   * 4)
+   *   修改前一个练习的程序, 显示所有匹配的单词.
+   * 5)
+   *   修改前一个练习的程序, 显示所有匹配的单词, 每一个都带有一个包含他的文件的列表.
+   * 7)
+   *   给练习3的程序添加一个监管actor, 监控读取文件的actor并记录任何因IOException推出的actor.
+   *   尝试通过移除那些计划要被处理的文件的方式触发IOException.
    */
   def StatisticsWords(reg: Regex) {
     import scala.collection.mutable._
@@ -182,7 +201,12 @@ object charpter20 {
   }
 
   /*
-   * question6
+   * 20.6
+   * 编写一个程序, 构造100个actor, 这些actor使用while(true)/receive循环, 
+   * 当接收到"Hello"消息时, 调用println(Thread.currentThread),
+   * 同时构造另外100个actor, 它们做同样的事, 不过采用loop/react.
+   * 将他们全部启动, 给他们全部都发送一个消息.
+   * 第一种acotr占用了多少线程, 第二种actor占用了多少线程?
    */
   def question6() {
 
@@ -230,11 +254,19 @@ object charpter20 {
     println(new Date().getTime - d2)
   }
   /*
-   * question 8
+   * 20.8
+   * 展示一个基于actor的程序是如何在发送同步消息时引发死锁的.
    */
   def question8() {
-
+    
   }
+  
+  /*
+   * 20.9
+   * 做出一个针对练习3的程序的有问题的实现, 在这个实现当中, 
+   * actor将更新一个共享计数器.
+   * 你能展示出程序运行四错误的吗?
+   */
 
   def main(args: Array[String]): Unit = {
   }
