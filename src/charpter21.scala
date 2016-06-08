@@ -128,6 +128,9 @@ object charpter21 extends App {
    * 表达式"abc".map(_.toUpper)的结果是一个String, 
    * 但"abc".map(_.toInt)的结果是一个Vector.
    * 为什么会这样?
+   * 
+   * Builder[Char,B] += Char 后的结果 TraversableLike[Char, That] 会隐式转化成 String
+   * 而Int 没有
    */
   val r1 = "abc".map(_.toUpper)
   val r2 = "abc".map(_.toInt)
