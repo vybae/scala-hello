@@ -14,7 +14,7 @@ object charpter02 {
    * */
   def question2 {
     println({})
-    println({}.getClass())
+    println({}.getClass)
   }
 
   /*
@@ -25,7 +25,7 @@ object charpter02 {
   def question3 {
     var x: Unit = ()
     println("x's type is: " + x.getClass)
-    var y: Int = 1
+    var y = 1
     x = y = 1
   }
 
@@ -35,7 +35,7 @@ object charpter02 {
    * for(int i=10;i>=0;i–)System.out.println(i);
    */
   def question4 {
-    (1 to 10 reverse) foreach { println(_) }
+    (1 to 10 reverse) foreach println
   }
 
   /*
@@ -45,10 +45,10 @@ object charpter02 {
   def question5(n: Int) {
     n match {
       case n if n >= 0 => {
-        (0 to n reverse) foreach { println(_) }
+        (0 to n reverse) foreach println
       }
       case n if n < 0 => {
-        n to 0 foreach { println(_) }
+        n to 0 foreach println
       }
     }
   }
@@ -73,7 +73,7 @@ object charpter02 {
    */
   def question7(s: String): Long = {
     var res: Long = 1
-    s foreach { x => res *= x.toLong }
+    s foreach { res *= _.toLong }
     res
   }
 
