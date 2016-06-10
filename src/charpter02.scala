@@ -60,9 +60,7 @@ object charpter02 {
    */
   def question6(s: String): Long = {
     var res: Long = 1
-    for (c <- s) {
-      res *= c.toLong
-    }
+    s foreach { res *= _.toLong }
     res
   }
 
@@ -71,31 +69,22 @@ object charpter02 {
    * 同样是解决前一个练习的问题，但这次不使用循环。
    * （提示：在Scaladoc中查看StringOps）
    */
-  def question7(s: String): Long = {
-    var res: Long = 1
-    s foreach { res *= _.toLong }
-    res
-  }
+  def question7(s: String): Long = s.foldLeft(1.toLong) { _ * _ }
 
   /*
    * 2.8 
    * 编写一个函数product(s:String)，
    * 计算前面练习中提到的乘积
-   */
-  def question8(s: String): Long = {
-    if (s.length() == 1) {
-      s(0) toLong
-    }
-    else {
-      s(0).toLong * question8(s.tail)
-    }
-  }
-
-  /*
    * 2.9 
    * 把前一个练习中的函数改成递归函数
    */
-  def question9(s: String): Long = question8(s)
+  def product(s: String): Long = {
+    if (s.length() == 1) {
+      s(0) toLong
+    } else {
+      s(0).toLong * product(s.tail)
+    }
+  }
 
   /*
    * 2.10 
