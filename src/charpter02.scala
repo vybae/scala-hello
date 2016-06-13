@@ -1,5 +1,6 @@
 /*
  * o(∩_∩)o 第二章，欢迎一起学scala，记得把注释取消了哦~
+ * welcome to learn scala together, remember cancelling comments o
  */
 object charpter02 {
   /*
@@ -101,24 +102,20 @@ object charpter02 {
   //    }
   //  }
   def product(s: String): Long = {
-    if (s.length() == 1) {
-      s(0) toLong
-    } else {
-      s(0).toLong * product(s.tail)
-    }
+    if (s.length() == 1) s(0) toLong
+    else s(0).toLong * product(s.tail)
   }
 
   /*
    * 2.10 
    * 编写函数计算xn,其中n是整数，使用如下的递归定义:
    */
-  def question10(x: Int, n: Int): BigInt =
-    n match {
-      case 0 => 1
-      case n if n < 0 => 1 / question10(x, -n)
-      case n if n % 2 == 0 => question10(x, n / 2) pow 2
-      case n if n % 2 == 1 => x * question10(x, n - 1)
-    }
+  def question10(x: Int, n: Int): BigInt = n match {
+    case 0 => 1
+    case n if n < 0 => 1 / question10(x, -n)
+    case n if n % 2 == 0 => question10(x, n / 2) pow 2
+    case n if n % 2 == 1 => x * question10(x, n - 1)
+  }
 
   def main(args: Array[String]): Unit = {
     // checkEmptyBlockType() //取消了运行下试试看呢?
