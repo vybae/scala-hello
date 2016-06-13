@@ -1,6 +1,6 @@
 /*
  * o(∩_∩)o 第二章，欢迎一起学scala，记得把注释取消了哦~
- * welcome to learn scala together, remember cancelling comments o
+ * welcome to learn scala together, remember cancelling comments o~
  */
 object charpter02 {
   /*
