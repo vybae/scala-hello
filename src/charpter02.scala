@@ -1,7 +1,4 @@
-/*
- * o(∩_∩)o 第二章，欢迎一起学scala，记得把注释取消了哦~
- * welcome to learn scala together, remember cancelling comments o~
- */
+
 object charpter02 {
   /*
    * 2.1 
@@ -84,7 +81,7 @@ object charpter02 {
    * 同样是解决前一个练习的问题，但这次不使用循环。
    * （提示：在Scaladoc中查看StringOps）
    */
-  //  def computeCharsUnicodeProduct(s: String) = (1.toLong /: s) { _ * _ }  // 这是what鬼，以后会学到哦
+  //  def computeCharsUnicodeProduct(s: String) = (1.toLong /: s) { _ * _ }
   def computeCharsUnicodeProduct(s: String) = s.foldLeft(1.toLong) { _ * _ }
 
   /*
@@ -94,7 +91,7 @@ object charpter02 {
    * 2.9 
    * 把前一个练习中的函数改成递归函数
    */
-  //  def product(s: String) = { // 对吗?为毛呢?
+  //  def product(s: String) = {
   //    if (s.length() == 1) {
   //      s(0) toLong
   //    } else {
@@ -118,6 +115,6 @@ object charpter02 {
   }
 
   def main(args: Array[String]): Unit = {
-    // checkEmptyBlockType() //取消了运行下试试看呢?
+    // checkEmptyBlockType()
   }
 }
